@@ -1,11 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import { App } from './App';
+import { BrowserRouter } from 'react-router-dom';
+import { OrderProvider } from 'helpers/useContext';
+import { App } from 'App';
+import 'index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <OrderProvider>
+      {/* <BrowserRouter basename="/delivery-basket-app"> */}
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </OrderProvider>
   </React.StrictMode>
 );
