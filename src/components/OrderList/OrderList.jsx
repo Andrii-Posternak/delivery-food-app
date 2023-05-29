@@ -1,5 +1,6 @@
 import { useOrder } from 'helpers/useContext';
 import { OrderItem } from 'components/OrderItem/OrderItem';
+import { CardList, OrderContainer, TotalPrice } from './OrderList.styled';
 
 export const OrderList = () => {
   const { foodToOrder } = useOrder();
@@ -13,15 +14,15 @@ export const OrderList = () => {
   };
 
   return (
-    <div>
-      <ul>
+    <OrderContainer>
+      <CardList>
         {foodToOrder.map(food => (
           <li key={food.id}>
             <OrderItem food={food} />
           </li>
         ))}
-      </ul>
-      <p>Total price: {calcTotalPrice()}$</p>
-    </div>
+      </CardList>
+      <TotalPrice>Total price: {calcTotalPrice()}$</TotalPrice>
+    </OrderContainer>
   );
 };

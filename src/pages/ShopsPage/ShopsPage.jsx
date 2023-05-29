@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useOrder } from 'helpers/useContext';
 import { FoodList } from 'components/FoodList/FoodList';
 import { ShopList } from 'components/ShopList/ShopList';
+import { StyledContainer } from './ShopsPage.styled';
 
 export const ShopsPage = () => {
   const [currentShop, setCurrentShop] = useState('All');
@@ -13,9 +14,9 @@ export const ShopsPage = () => {
   }, [foodToOrder]);
 
   return (
-    <div>
-      <ShopList setCurrentShop={setCurrentShop} />
+    <StyledContainer>
+      <ShopList setCurrentShop={setCurrentShop} currentShop={currentShop} />
       <FoodList currentShop={currentShop} />
-    </div>
+    </StyledContainer>
   );
 };

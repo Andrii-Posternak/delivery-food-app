@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { useOrder } from 'helpers/useContext';
 import BIG_MAC from '../../images/McDonalds/BIG_MAC.jpg';
+import {
+  DeleteBtn,
+  DescriptionWrap,
+  FoodCard,
+  FoodTitle,
+  ImageWrap,
+  Input,
+} from './OrderItem.styled';
 
 export const OrderItem = ({ food }) => {
   const { id, name, price, imageURL, amount } = food;
@@ -46,25 +54,27 @@ export const OrderItem = ({ food }) => {
   };
 
   return (
-    <div>
-      <button type="button" onClick={() => handleDeleteFood(id)}>
+    <FoodCard>
+      <DeleteBtn type="button" onClick={() => handleDeleteFood(id)}>
         x
-      </button>
-      <div>
-        {/* <img src={imageURL} alt="food" width={100}/> */}
-        <img src={BIG_MAC} alt="food" width={100} />
-      </div>
-      <p>{name}</p>
-      <p>Price: {price}$</p>
-      <p>Total: {calcTotal()}$</p>
-      <input
-        type="number"
-        min="1"
-        max="100"
-        name="foodName"
-        value={quantity}
-        onChange={handleQuantity}
-      />
-    </div>
+      </DeleteBtn>
+      <ImageWrap>
+        {/* <img src={imageURL} alt="food" width='100'/> */}
+        <img src={BIG_MAC} alt="food" width="200" />
+      </ImageWrap>
+      <DescriptionWrap>
+        <FoodTitle>{name}</FoodTitle>
+        <p>Price: {price}$</p>
+        <p>Total: {calcTotal()}$</p>
+        <Input
+          type="number"
+          min="1"
+          max="100"
+          name="foodName"
+          value={quantity}
+          onChange={handleQuantity}
+        />
+      </DescriptionWrap>
+    </FoodCard>
   );
 };

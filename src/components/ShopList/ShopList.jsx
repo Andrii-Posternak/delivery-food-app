@@ -1,7 +1,8 @@
 import { useOrder } from 'helpers/useContext';
 import { shops } from 'DATA/SHOPS_DATA';
+import { ShopBtn, ShopsContainer, ShopsTitle } from './ShopList.styled';
 
-export const ShopList = ({ setCurrentShop }) => {
+export const ShopList = ({ setCurrentShop, currentShop }) => {
   const { foodToOrder } = useOrder();
 
   const isDisabled = shopName => {
@@ -10,24 +11,30 @@ export const ShopList = ({ setCurrentShop }) => {
     return false;
   };
 
+  const isSelected = shopName => {
+    if (currentShop === shopName) return true;
+    return false;
+  };
+
   return (
-    <div>
-      <h1>Shops:</h1>
+    <ShopsContainer>
+      <ShopsTitle>Shops:</ShopsTitle>
       <ul>
         {shops.map(shop => {
           return (
             <li key={shop.id}>
-              <button
+              <ShopBtn
                 type="button"
                 onClick={() => setCurrentShop(shop.name)}
                 disabled={isDisabled(shop.name)}
+                isSelected={isSelected(shop.name)}
               >
                 {shop.name}
-              </button>
+              </ShopBtn>
             </li>
           );
         })}
       </ul>
-    </div>
+    </ShopsContainer>
   );
 };

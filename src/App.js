@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { routes } from 'utils/routes';
 import { ShoppingCartPage } from 'pages/ShoppingCartPage/ShoppingCartPage';
-import { ShopsPage } from 'pages/ShopsPage/ShopsPages';
+import { ShopsPage } from 'pages/ShopsPage/ShopsPage';
 import { SharedLayout } from 'components/SharedLayout/SharedLayout';
 
 export const App = () => {

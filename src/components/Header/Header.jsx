@@ -1,13 +1,11 @@
-import { NavLink } from 'react-router-dom';
 import { routes } from 'utils/routes';
+import { StyledHeader, StyledLink } from './Header.styled';
 
 export const Header = () => {
   return (
-    <>
-      <header>
-        <NavLink to={routes.shops}>Shops</NavLink>
-        <NavLink to={routes.basket}>Shopping Cart </NavLink>
-      </header>
-    </>
+    <StyledHeader>
+      <StyledLink to={routes.shops}>Shops</StyledLink>
+      <StyledLink to={routes.basket}>Shopping Cart </StyledLink>
+    </StyledHeader>
   );
 };

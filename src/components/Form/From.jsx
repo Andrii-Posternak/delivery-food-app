@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useOrder } from 'helpers/useContext';
+import { Button, Input, Label, StyledForm, WrapButton } from './Form.styled';
 
 export const Form = () => {
   const [form, setForm] = useState({});
@@ -22,48 +23,50 @@ export const Form = () => {
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit}>
-      <label>
+    <StyledForm ref={formRef} onSubmit={handleSubmit}>
+      <Label>
         Name:
-        <input
+        <Input
           type="text"
           placeholder="name"
           name="name"
           required
           onChange={handleChange}
         />
-      </label>
-      <label>
+      </Label>
+      <Label>
         Email:
-        <input
+        <Input
           type="email"
           placeholder="email"
           name="email"
           required
           onChange={handleChange}
         />
-      </label>
-      <label>
+      </Label>
+      <Label>
         Phone:
-        <input
+        <Input
           type="tel"
           placeholder="phone"
           name="phone"
           required
           onChange={handleChange}
         />
-      </label>
-      <label>
+      </Label>
+      <Label>
         Address:
-        <input
+        <Input
           type="text"
           placeholder="address"
           name="address"
           required
           onChange={handleChange}
         />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+      </Label>
+      <WrapButton>
+        <Button type="submit">Submit</Button>
+      </WrapButton>
+    </StyledForm>
   );
 };
