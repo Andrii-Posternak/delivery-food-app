@@ -17,6 +17,7 @@ export const FoodList = ({ currentShop }) => {
       <CardList>
         {[...foods]
           .sort((a, b) => a.name.localeCompare(b.name))
+          // eslint-disable-next-line array-callback-return
           .map(food => {
             if (currentShop === food.shop || currentShop === 'All') {
               return (
