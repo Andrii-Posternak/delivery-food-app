@@ -3,7 +3,7 @@ import { useOrder } from 'helpers/useContext';
 import { addOrderApi } from 'services/api';
 import { Button, Input, Label, StyledForm } from './Form.styled';
 
-export const Form = () => {
+export const Form = ({ setIsModalOpen, setOrderNumber }) => {
   const [form, setForm] = useState({});
 
   const { foodToOrder, setFoodToOrder } = useOrder();
@@ -26,8 +26,18 @@ export const Form = () => {
     };
 
     formRef.current.reset();
+    getOrderNumber(formData);
     setFoodToOrder([]);
-    addOrderApi(formData);
+    setIsModalOpen(true);
+  };
+
+  const getOrderNumber = async data => {
+    try {
+      const order = await addOrderApi(data);
+      setOrderNumber(order._id);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const calcTotalPrice = () => {

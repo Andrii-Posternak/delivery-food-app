@@ -11,7 +11,8 @@ Online food delivery service
 
 ### Frontend
 
-To visit the live page follow the [link](delivery-food-app-go.netlify.app)
+To visit the live page follow the
+[link](https://delivery-food-app-go.netlify.app/)
 
 To start locally:
 
