@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Backdrop, Button, StyledModal, Text } from './Modal.styled';
 
 export const Modal = ({ setIsModalOpen, orderNumber }) => {
@@ -9,10 +10,10 @@ export const Modal = ({ setIsModalOpen, orderNumber }) => {
 
     navigator.clipboard.writeText(value).then(
       () => {
-        console.log('your order number has been copied');
+        Notify.success('your order number has been copied');
       },
       () => {
-        console.log('An error has occurred');
+        Notify.failure('An error has occurred');
       }
     );
   };
