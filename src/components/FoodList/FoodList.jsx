@@ -1,20 +1,31 @@
+import { useEffect, useState } from 'react';
+import { getFoodsApi } from 'services/api';
 import { FoodItem } from 'components/FoodItem/FoodItem';
-import { foods } from 'DATA/FOOD_DATA';
-import { CardList, FoodsContainer } from './FoodList.styled';
+import { CardItem, CardList, FoodsContainer } from './FoodList.styled';
 
 export const FoodList = ({ currentShop }) => {
+  const [foods, setFoods] = useState([]);
+
+  useEffect(() => {
+    getFoodsApi().then(value => {
+      setFoods(value);
+    });
+  }, []);
+
   return (
     <FoodsContainer>
       <CardList>
-        {foods.map(food => {
-          if (currentShop === food.shop || currentShop === 'All') {
-            return (
-              <li key={food.id}>
-                <FoodItem food={food} />
-              </li>
-            );
-          }
-        })}
+        {[...foods]
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map(food => {
+            if (currentShop === food.shop || currentShop === 'All') {
+              return (
+                <CardItem key={food._id}>
+                  <FoodItem food={food} />
+                </CardItem>
+              );
+            }
+          })}
       </CardList>
     </FoodsContainer>
   );

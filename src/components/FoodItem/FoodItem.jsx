@@ -1,15 +1,14 @@
 import { useOrder } from 'helpers/useContext';
-import BIG_MAC from '../../images/McDonalds/BIG_MAC.jpg';
 import { AddFoodBtn, FoodCard, FoodTitle, ImageWrap } from './FoodItem.styled';
 
 export const FoodItem = ({ food }) => {
-  const { id, name, price, imageURL } = food;
+  const { _id, name, price, imageURL } = food;
   const { foodToOrder, setFoodToOrder } = useOrder();
 
   const addToCart = food => {
-    const isContains = foodToOrder.some(food => food.id === id);
+    const isContains = foodToOrder.some(food => food._id === _id);
     if (isContains) {
-      const filterdFood = foodToOrder.filter(food => food.id !== id);
+      const filterdFood = foodToOrder.filter(food => food._id !== _id);
       setFoodToOrder([...filterdFood]);
     } else {
       const newFood = { ...food, amount: 1 };
@@ -18,21 +17,20 @@ export const FoodItem = ({ food }) => {
   };
 
   const isSelected = id => {
-    return foodToOrder.some(food => food.id === id);
+    return foodToOrder.some(food => food._id === id);
   };
 
   return (
     <FoodCard>
       <ImageWrap>
-        {/* <img src={imageURL} alt={name} width="100" /> */}
-        <img src={BIG_MAC} alt={name} width="200" />
+        <img src={imageURL} alt={name} loading="lazy" />
       </ImageWrap>
       <FoodTitle>{name}</FoodTitle>
       <p>{price}$</p>
       <AddFoodBtn
         type="button"
         onClick={() => addToCart(food)}
-        isSelected={isSelected(id)}
+        isSelected={isSelected(_id)}
       >
         add to Cart
       </AddFoodBtn>

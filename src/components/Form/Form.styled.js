@@ -4,12 +4,33 @@ export const StyledForm = styled.form`
   flex: 0.5;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 30px;
 
+  max-height: calc(100vh - 2 * 20px - 35px - 30px);
   border: 1px solid #212121;
   border-radius: 8px;
+  box-shadow: 0px 0px 10px 3px #212121;
+  overflow-x: hidden;
+  overflow-y: scroll;
 
   padding: 20px 50px;
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 2px;
+    margin: 8px;
+  }
+
+  &::-webkit-scrollbar {
+    max-width: 6px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ffa500;
+    border-radius: 5px;
+  }
 `;
 
 export const Label = styled.label`
@@ -31,11 +52,6 @@ export const Input = styled.input`
   }
 `;
 
-export const WrapButton = styled.div`
-  flex: 1;
-  display: flex;
-`;
-
 export const Button = styled.button`
   align-self: flex-end;
 
@@ -44,7 +60,7 @@ export const Button = styled.button`
   text-align: center;
 
   width: 150px;
-  height: 50px;
+  min-height: 50px;
 
   margin-bottom: 8px;
   margin-left: auto;

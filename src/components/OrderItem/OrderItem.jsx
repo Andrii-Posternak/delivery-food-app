@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useOrder } from 'helpers/useContext';
-import BIG_MAC from '../../images/McDonalds/BIG_MAC.jpg';
 import {
   DeleteBtn,
   DescriptionWrap,
@@ -11,7 +10,7 @@ import {
 } from './OrderItem.styled';
 
 export const OrderItem = ({ food }) => {
-  const { id, name, price, imageURL, amount } = food;
+  const { _id, name, price, imageURL, amount } = food;
 
   const [quantity, setQuantity] = useState(amount);
 
@@ -19,7 +18,7 @@ export const OrderItem = ({ food }) => {
 
   const changeQuantity = quantity => {
     const changedFood = foodToOrder.map(food => {
-      if (food.id === id) {
+      if (food._id === _id) {
         return {
           ...food,
           amount: quantity,
@@ -44,7 +43,7 @@ export const OrderItem = ({ food }) => {
   };
 
   const handleDeleteFood = id => {
-    const changedFood = foodToOrder.filter(food => food.id !== id);
+    const changedFood = foodToOrder.filter(food => food._id !== id);
     setFoodToOrder([...changedFood]);
   };
 
@@ -55,12 +54,11 @@ export const OrderItem = ({ food }) => {
 
   return (
     <FoodCard>
-      <DeleteBtn type="button" onClick={() => handleDeleteFood(id)}>
+      <DeleteBtn type="button" onClick={() => handleDeleteFood(_id)}>
         x
       </DeleteBtn>
       <ImageWrap>
-        {/* <img src={imageURL} alt="food" width='100'/> */}
-        <img src={BIG_MAC} alt="food" width="200" />
+        <img src={imageURL} alt="food" loading="lazy" />
       </ImageWrap>
       <DescriptionWrap>
         <FoodTitle>{name}</FoodTitle>

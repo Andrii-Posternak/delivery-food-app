@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useOrder } from 'helpers/useContext';
-import { Button, Input, Label, StyledForm, WrapButton } from './Form.styled';
+import { addOrderApi } from 'services/api';
+import { Button, Input, Label, StyledForm } from './Form.styled';
 
 export const Form = () => {
   const [form, setForm] = useState({});
@@ -16,10 +17,30 @@ export const Form = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const formData = { user: form, order: foodToOrder };
-    console.log(formData);
+
+    const totalPrice = calcTotalPrice();
+    const date = new Date();
+    const formData = {
+      user: form,
+      order: { totalPrice, date, food: foodToOrder },
+    };
+
     formRef.current.reset();
     setFoodToOrder([]);
+    addOrderApi(formData);
+  };
+
+  const calcTotalPrice = () => {
+    const total = foodToOrder.reduce((acc, { price, amount }) => {
+      acc += price * amount;
+      return +acc.toFixed(2);
+    }, 0);
+    return total;
+  };
+
+  const isDisabled = () => {
+    if (!foodToOrder.length) return true;
+    return false;
   };
 
   return (
@@ -64,9 +85,9 @@ export const Form = () => {
           onChange={handleChange}
         />
       </Label>
-      <WrapButton>
-        <Button type="submit">Submit</Button>
-      </WrapButton>
+      <Button type="submit" disabled={isDisabled()}>
+        Submit
+      </Button>
     </StyledForm>
   );
 };

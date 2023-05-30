@@ -16,13 +16,19 @@ export const OrderList = () => {
   return (
     <OrderContainer>
       <CardList>
-        {foodToOrder.map(food => (
-          <li key={food.id}>
-            <OrderItem food={food} />
-          </li>
-        ))}
+        {[...foodToOrder]
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map(food => (
+            <li key={food._id}>
+              <OrderItem food={food} />
+            </li>
+          ))}
       </CardList>
-      <TotalPrice>Total price: {calcTotalPrice()}$</TotalPrice>
+      {!foodToOrder.length ? (
+        <TotalPrice>Nothing selected</TotalPrice>
+      ) : (
+        <TotalPrice>Total price: {calcTotalPrice()}$</TotalPrice>
+      )}
     </OrderContainer>
   );
 };

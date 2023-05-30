@@ -7,6 +7,7 @@ export const FoodCard = styled.div`
   gap: 10px;
 
   width: 400px;
+  height: 180px;
 
   border: 1px solid #212121;
   border-radius: 4px;
@@ -36,6 +37,13 @@ export const DeleteBtn = styled.button`
 
 export const ImageWrap = styled.div`
   width: 200px;
+  height: 100%;
+
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 `;
 
 export const DescriptionWrap = styled.div`
@@ -55,4 +63,9 @@ export const Input = styled.input`
   border-radius: 4px;
 
   padding: 8px;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0px 0px 8px 2px #212121;
+  }
 `;
