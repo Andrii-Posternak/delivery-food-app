@@ -11,8 +11,7 @@ Online food delivery service
 
 ### Frontend
 
-To visit the live page follow the
-[link](https://github.com/Andrii-Posternak/delivery-food-app)
+To visit the live page follow the [link](delivery-food-app-go.netlify.app)
 
 To start locally:
 
@@ -23,13 +22,15 @@ To start locally:
 ### Backend
 
 To use a deployed project use this link
-`https://github.com/Andrii-Posternak/delivery-food-app/api` as the base url
+`https://delivery-food-app-backend.onrender.com/api` as the base url
 
 To start locally:
 
-- follow the [link](https://github.com/Andrii-Posternak/delivery-food-app) clone
-  the project locally;
+- follow the
+  [link](https://github.com/Andrii-Posternak/delivery-food-app-backend) and
+  clone the project locally;
 - type `npm install` in console;
+- create .env file in root directory and add to it environments"PORT", "DB_HOST"
 - type `npm start` in console;
 
 The following endpoints are available:
