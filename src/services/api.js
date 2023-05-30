@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3010/api';
+axios.defaults.baseURL = 'https://delivery-food-app-backend.onrender.com/api';
 
 export const getShopsApi = async () => {
   try {
