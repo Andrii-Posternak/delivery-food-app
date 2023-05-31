@@ -1,10 +1,15 @@
 import { useRef, useState } from 'react';
 import { useOrder } from 'helpers/useContext';
+import {
+  getFromStorage,
+  updateStorage,
+  STORAGE_KEYS,
+} from 'helpers/localStorage';
 import { addOrderApi } from 'services/api';
 import { Button, Input, Label, StyledForm } from './Form.styled';
 
 export const Form = ({ setIsModalOpen, setOrderNumber }) => {
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState(getFromStorage(STORAGE_KEYS.FORM) ?? {});
 
   const { foodToOrder, setFoodToOrder } = useOrder();
 
@@ -13,6 +18,7 @@ export const Form = ({ setIsModalOpen, setOrderNumber }) => {
   const handleChange = event => {
     const { value, name } = event.target;
     setForm(prev => ({ ...prev, [name]: value }));
+    updateStorage(STORAGE_KEYS.FORM, { [name]: value });
   };
 
   const handleSubmit = event => {
@@ -61,8 +67,9 @@ export const Form = ({ setIsModalOpen, setOrderNumber }) => {
           type="text"
           placeholder="name"
           name="name"
-          required
+          value={form.name}
           onChange={handleChange}
+          required
         />
       </Label>
       <Label>
@@ -71,8 +78,9 @@ export const Form = ({ setIsModalOpen, setOrderNumber }) => {
           type="email"
           placeholder="email"
           name="email"
-          required
+          value={form.email}
           onChange={handleChange}
+          required
         />
       </Label>
       <Label>
@@ -81,8 +89,9 @@ export const Form = ({ setIsModalOpen, setOrderNumber }) => {
           type="tel"
           placeholder="phone"
           name="phone"
-          required
+          value={form.phone}
           onChange={handleChange}
+          required
         />
       </Label>
       <Label>
@@ -91,8 +100,9 @@ export const Form = ({ setIsModalOpen, setOrderNumber }) => {
           type="text"
           placeholder="address"
           name="address"
-          required
+          value={form.address}
           onChange={handleChange}
+          required
         />
       </Label>
       <Button type="submit" disabled={isDisabled()}>

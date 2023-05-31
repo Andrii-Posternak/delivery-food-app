@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useOrder } from 'helpers/useContext';
+import {
+  addToStorage,
+  getFromStorage,
+  STORAGE_KEYS,
+} from 'helpers/localStorage';
 import { getShopsApi } from 'services/api';
 import { ShopBtn, ShopsContainer, ShopsTitle } from './ShopList.styled';
 
@@ -8,9 +13,19 @@ export const ShopList = ({ setCurrentShop, currentShop }) => {
   const { foodToOrder } = useOrder();
 
   useEffect(() => {
-    getShopsApi().then(value => {
-      setShops(value);
-    });
+    try {
+      const shopsList = getFromStorage(STORAGE_KEYS.SHOPS);
+      if (shopsList) {
+        setShops(shopsList);
+      } else {
+        getShopsApi().then(value => {
+          setShops(value);
+          addToStorage(STORAGE_KEYS.SHOPS, value);
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   }, []);
 
   const isDisabled = shopName => {
